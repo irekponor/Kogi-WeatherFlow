@@ -73,14 +73,14 @@ const Weather: React.FC = () => {
   const ZoomToLGA: React.FC<{ lat: number; lng: number }> = ({ lat, lng }) => {
     const map = useMap();
     useEffect(() => {
-      map.flyTo([lat, lng], 14, { duration: 1.5 });
+      map.flyTo([lat, lng], 14, { duration: 2.0 });
     }, [lat, lng]);
     return null;
   };
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      <div className="w-full md:w-1/3 bg-gray-100 max-md:hidden overflow-y-auto p-4 border-r border-gray-300">
+      <div className="w-full md:w-1/4 bg-gray-100 max-md:hidden overflow-y-auto p-4 border-r border-gray-300">
         <h2 className="text-xl font-bold mb-4">Lagos LGA Weather Summary</h2>
         {weatherData.length === 0 ? (
           <p>Loading weather data...</p>
@@ -108,7 +108,8 @@ const Weather: React.FC = () => {
             center={[6.5244, 3.3792]}
             zoom={10}
             style={{ height: "100%", width: "100%" }}
-            whenCreated={(mapInstance) => (mapRef.current = mapInstance)}
+               //@ts-ignore: acessToken is valid at runtime even if type is missing
+            whenReady={(mapInstance: L.Map | null) => (mapRef.current = mapInstance)}
           >
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -123,7 +124,7 @@ const Weather: React.FC = () => {
                 position={[item.lat, item.lng]}
                 icon={L.icon({
                   iconUrl: "https://cdn-icons-png.flaticon.com/512/1116/1116453.png",
-                  iconSize: [30, 30],
+                  iconSize: [34, 34],
                 })}
               >
                 <Popup>
