@@ -12,7 +12,7 @@ interface WeatherData {
   lng: number;
 }
 
-const WeatherMap: React.FC = () => {
+const Weather: React.FC = () => {
   const [geoData, setGeoData] = useState<any>(null);
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [selected, setSelected] = useState<string | null>(null);
@@ -142,4 +142,4 @@ const WeatherMap: React.FC = () => {
   );
 };
 
-export default WeatherMap;
+export default Weather;
